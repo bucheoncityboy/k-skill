@@ -24,9 +24,10 @@ Users can opt out with:
 KSKILL_ANALYTICS_DISABLED=1 k-skill <command>
 ```
 
-Analytics is inactive unless `POSTHOG_API_KEY` is configured. The endpoint
-defaults to `https://us.i.posthog.com`; set `POSTHOG_HOST` for a self-hosted
-PostHog instance or a test fixture.
+The published CLI includes the k-skill analytics project's public PostHog
+Project API Key. Set `POSTHOG_API_KEY` to override it for a different project.
+The endpoint defaults to `https://us.i.posthog.com`; set `POSTHOG_HOST` for a
+self-hosted PostHog instance or a test fixture.
 
 ## PostHog metrics
 

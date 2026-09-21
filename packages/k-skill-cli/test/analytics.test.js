@@ -4,10 +4,13 @@ const http = require("node:http");
 const path = require("node:path");
 const childProcess = require("node:child_process");
 const { deriveUsageMetrics } = require("../src/metrics");
+const { analyticsConfig } = require("../src/analytics");
 
 const packageRoot = path.join(__dirname, "..");
 const binPath = path.join(packageRoot, "bin", "k-skill.js");
 const packageVersion = require("../package.json").version;
+const DEFAULT_PROJECT_API_KEY =
+  "phc_xlJYWKplsT2UNHng9eDULTGddlq0RoTuE8Dh64nrpmL";
 
 function startCaptureServer() {
   let resolveRequest;
@@ -88,6 +91,26 @@ test("CLI captures privacy-bounded invocation events for PostHog metrics", { tim
   assert.equal("input" in request.body.properties, false);
 });
 
+test("analytics uses the built-in public project token and still honors an override", () => {
+  const defaultConfig = analyticsConfig({
+    POSTHOG_API_KEY: "",
+    POSTHOG_HOST: "",
+    KSKILL_ANALYTICS_DISABLED: "",
+    KSKILL_ANALYTICS_ID: "test-user-1",
+  });
+  const overrideConfig = analyticsConfig({
+    POSTHOG_API_KEY: "phc_override",
+    POSTHOG_HOST: "https://example.test",
+    KSKILL_ANALYTICS_DISABLED: "",
+    KSKILL_ANALYTICS_ID: "test-user-1",
+  });
+
+  assert.equal(defaultConfig.apiKey, DEFAULT_PROJECT_API_KEY);
+  assert.equal(defaultConfig.host, "https://us.i.posthog.com");
+  assert.equal(overrideConfig.apiKey, "phc_override");
+  assert.equal(overrideConfig.host, "https://example.test");
+});
+
 test("same distinct_id and stable event properties support daily, weekly, monthly, and recurrent metrics", { timeout: 5000 }, async (t) => {
   const capture = await startCaptureServer();
   t.after(() => capture.server.close());
@@ -125,26 +148,24 @@ test("captured event identity supports daily, weekly, monthly, and recurrent agg
   });
 });
 
-test("CLI remains usable without analytics configuration or with analytics disabled", async () => {
-  const baseEnv = {
-    POSTHOG_API_KEY: "",
-    POSTHOG_HOST: "",
+test("CLI remains usable when analytics delivery fails or is disabled", async () => {
+  const isolatedEnv = {
+    POSTHOG_API_KEY: "phc_test",
+    POSTHOG_HOST: "http://127.0.0.1:1",
     KSKILL_ANALYTICS_ID: "",
     KSKILL_ANALYTICS_DISABLED: "",
   };
 
-  const unconfigured = await runCli(["version"], baseEnv);
+  const unavailable = await runCli(["version"], isolatedEnv);
   const disabled = await runCli(["version"], {
-    ...baseEnv,
-    POSTHOG_API_KEY: "phc_test",
-    POSTHOG_HOST: "http://127.0.0.1:1",
+    ...isolatedEnv,
     KSKILL_ANALYTICS_ID: "test-user-1",
     KSKILL_ANALYTICS_DISABLED: "1",
   });
 
-  assert.equal(unconfigured.status, 0);
-  assert.equal(unconfigured.stdout, `${packageVersion}\n`);
-  assert.equal(unconfigured.stderr, "");
+  assert.equal(unavailable.status, 0);
+  assert.equal(unavailable.stdout, `${packageVersion}\n`);
+  assert.equal(unavailable.stderr, "");
   assert.equal(disabled.status, 0);
   assert.equal(disabled.stdout, `${packageVersion}\n`);
   assert.equal(disabled.stderr, "");

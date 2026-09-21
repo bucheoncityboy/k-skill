@@ -8,6 +8,8 @@ const { version: cliVersion } = require("../package.json");
 const policy = require("./analytics-policy.json");
 
 const DEFAULT_HOST = "https://us.i.posthog.com";
+const DEFAULT_PROJECT_API_KEY =
+  "phc_xlJYWKplsT2UNHng9eDULTGddlq0RoTuE8Dh64nrpmL";
 const ANALYTICS_SCHEMA_VERSION = 1;
 const DISABLED_VALUES = new Set(["1", "true", "yes", "on"]);
 
@@ -44,10 +46,10 @@ function readOrCreateAnalyticsId(env, randomUUID = crypto.randomUUID) {
 }
 
 function analyticsConfig(env = process.env) {
-  if (isDisabled(env) || !env.POSTHOG_API_KEY) return null;
+  if (isDisabled(env)) return null;
 
   return {
-    apiKey: env.POSTHOG_API_KEY,
+    apiKey: env.POSTHOG_API_KEY || DEFAULT_PROJECT_API_KEY,
     host: (env.POSTHOG_HOST || DEFAULT_HOST).replace(/\/+$/, ""),
     distinctId: readOrCreateAnalyticsId(env),
   };
@@ -96,6 +98,7 @@ async function captureInvocation(details, env = process.env, fetchImpl = fetch) 
 
 module.exports = {
   ANALYTICS_SCHEMA_VERSION,
+  DEFAULT_PROJECT_API_KEY,
   analyticsConfig,
   buildInvocationEvent,
   captureInvocation,

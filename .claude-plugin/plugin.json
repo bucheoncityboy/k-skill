@@ -135,6 +135,7 @@
     "./subway-lost-property",
     "./ticket-availability",
     "./toss-investment",
+    "./yield-curve-monitor",
     "./zipcode-search"
   ]
 }

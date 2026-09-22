@@ -1,4 +1,23 @@
-# 국고채 수익률곡선 모니터
+# korean-interest-rate-briefing — assembled instructions
+
+Runtime mode: dolshoi (CloakBrowser available)
+
+## Runtime rules
+
+- Detect capabilities, not product names. Dolshoi credential mode is active only when `DOLSHOI_ACTION_BROKER_URL` is set and `vault-run` is available; CloakBrowser mode is active when the built-in browser tool identifies CloakBrowser or `CLOAKBROWSER_PEEK_TOKEN` is set.
+- When the user asks for an action and the official surface supports it lawfully, continue beyond lookup through reversible preparation and execution. Do not declare completion at a result list, deep link, or handoff when the action can still be carried out.
+- Immediately before an irreversible external side effect such as payment, message/email delivery, final submission, cancellation, account mutation, or public posting, call `clarify` with the exact target, amount/payload, and effect. Execute only after approval; do not ask again for already-approved reversible steps.
+- Preserve hard boundaries for law, required physical presence, CAPTCHA, identity proofing, electronic signatures, and unsupported official surfaces. In those cases, complete the furthest lawful supported step and open or prepare the exact next official step for the user.
+- Before using k-skill CLI tools, run `npx -y @nomadamas/k-skill@0 update` so the CLI and all coding-agent skill installs (including `~/.agents/skills`) are current.
+- This skill is lookup-oriented. Completion means the requested data is retrieved, summarized with its source (table/endpoint, period, unit), and any requested follow-up action is connected to the official surface that supports it.
+
+## Bundled asset access
+
+- Execute bundled helpers only through `npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/<file> -- <args>`; do not assume a repository-relative or installed-skill-relative path.
+- Resolve an asset path with `npx -y @nomadamas/k-skill@0 path korean-interest-rate-briefing <relative-path>` only when another tool explicitly requires a filesystem path.
+- Read bundled references through `npx -y @nomadamas/k-skill@0 read korean-interest-rate-briefing references/<file>`.
+
+# 한국 금리 브리핑
 
 ## What this skill does
 
@@ -39,7 +58,7 @@
 “오늘 커브 정리”, “데일리 커브” 요청의 기본 모드다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset dashboard
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset dashboard
 ```
 
 현재 6개 만기의 레벨과 전일·1주·전월말 변화, 5Y−3Y·10Y−5Y·10Y−3Y·30Y−10Y 스프레드, 한국은행 기준금리와 3Y−기준금리 갭을 함께 표시한다. “오늘”은 KST 오늘 이전에 ECOS에서 확보되는 최신 공통 관측일이다.
@@ -47,12 +66,12 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 ### 2. 현재 스냅샷과 단일 비교 프리셋
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset today
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset previous-session
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset previous-week
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset previous-month-end
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset previous-quarter-end
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset year-start
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset today
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset previous-session
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset previous-week
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset previous-month-end
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset previous-quarter-end
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset year-start
 ```
 
 `previous-session`은 달력상 어제가 아니라 최신 공통 관측일의 직전 공통 관측일이다. `year-start` 기준은 직전 연도 마지막 공통 관측일이다.
@@ -60,8 +79,8 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 ### 3. 최근 5·20거래일 추이
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --lookback-sessions 5
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --lookback-sessions 20
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --lookback-sessions 5
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --lookback-sessions 20
 ```
 
 만기별 시작·종료 금리, 순변화, 고점·저점, 최대 일간 변동과 발생일을 표시한다. 공통 관측일이 요청 개수보다 적으면 `INCOMPLETE`이며 확보 건수를 밝힌다.
@@ -71,14 +90,14 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 월만 주어지면 월말 대 월말 스냅샷으로 비교한다. 종료 월이 현재 진행 중인 달이면 미래 월말을 요구하지 않고 KST 오늘 기준 최신 공통 관측일을 사용하며, 답변에 실제 관측일을 밝힌다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --from-month 2026-07 --to-month 2026-08
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --base 2026-09-11 --as-of 2026-09-18
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --from-month 2026-07 --to-month 2026-08
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --base 2026-09-11 --as-of 2026-09-18
 ```
 
 ### 5. 기준금리 갭
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset policy-gap
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset policy-gap
 ```
 
 ECOS `722Y001/0101000` 한국은행 기준금리를 별도로 검증하고 같은 최신 시점의 국고채 3년과 차이를 bp로 계산한다. 기준금리 조회만 실패하면 커브 결과는 유지하고 갭만 제외한다.
@@ -88,7 +107,7 @@ ECOS `722Y001/0101000` 한국은행 기준금리를 별도로 검증하고 같�
 사용자가 지정한 금통위·물가 발표 등 이벤트 날짜의 직전 공통 관측일과 당일 또는 이후 최초 공통 관측일을 비교한다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --event-date 2026-08-27
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --event-date 2026-08-27
 ```
 
 “최근 금통위”는 한국은행 공식 일정에서 회의일을 확인하고 링크를 제시한 뒤 실행한다. 일정은 코드에 하드코딩하지 않는다.
@@ -101,15 +120,15 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 
 ```bash
 # 실제 관측일 확인
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset dashboard
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset dashboard
 
 # 관측일에 맞는 입력 틀 생성
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --news-template 2026-09-21 > news-evidence.json
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --news-template 2026-09-21 > news-evidence.json
 
 # 기사 확인 후 evidence를 채워 보고서 생성
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- \
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- \
   --base 2026-09-18 --as-of 2026-09-21 \
-  --news-evidence news-evidence.json --out ./yield-curve-report
+  --news-evidence news-evidence.json --out ./interest-rate-briefing
 ```
 
 기사 항목의 필수 필드는 다음과 같다.
@@ -131,8 +150,8 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 HTML·CSV·evidence 저장을 명시적으로 요청한 경우에만 정확한 두 날짜 비교에 `--out`을 붙인다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --base 2026-09-11 --as-of 2026-09-18 --out ./yield-curve-report
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --input input.csv --base 2026-09-11 --as-of 2026-09-18
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --base 2026-09-11 --as-of 2026-09-18 --out ./interest-rate-briefing
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --input input.csv --base 2026-09-11 --as-of 2026-09-18
 ```
 
 CSV 헤더는 `date,tenor,yield_pct`이며 여섯 만기와 연% 단위를 사용한다. 사용자 자료는 `USER_CSV`로 표시한다.
@@ -155,8 +174,8 @@ CSV 헤더는 `date,tenor,yield_pct`이며 여섯 만기와 연% 단위를 사�
 번들 파일을 직접 사용할 때는 npm 캐시 경로를 추측하지 말고 다음 CLI 계약을 사용한다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/<file> -- <args>
-npx -y @nomadamas/k-skill@0 read yield-curve-monitor references/<file>
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/<file> -- <args>
+npx -y @nomadamas/k-skill@0 read korean-interest-rate-briefing references/<file>
 ```
 
 - 커브: https://ecos.bok.or.kr/ · `817Y002` · `연%` · `D`
@@ -167,7 +186,7 @@ npx -y @nomadamas/k-skill@0 read yield-curve-monitor references/<file>
 - 뉴스 evidence는 허용된 HTTPS 호스트, KST 관측일, 게시·수집 시각, 중복 URL, 방향 일치와 source fingerprint를 검증
 
 ```bash
-npx -y @nomadamas/k-skill@0 read yield-curve-monitor references/methodology.md
+npx -y @nomadamas/k-skill@0 read korean-interest-rate-briefing references/methodology.md
 ```
 
 ## Done when

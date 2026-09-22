@@ -78,6 +78,7 @@
     "./korean-heritage-search",
     "./korean-holiday-calendar",
     "./korean-humanizer",
+    "./korean-interest-rate-briefing",
     "./korean-jangbu-for",
     "./korean-law-search",
     "./korean-marathon-schedule",
@@ -135,7 +136,6 @@
     "./subway-lost-property",
     "./ticket-availability",
     "./toss-investment",
-    "./yield-curve-monitor",
     "./zipcode-search"
   ]
 }

@@ -8,7 +8,7 @@ export const TENOR_META = {
     20: { itemCode: '010220000', itemName: '국고채(20년)' },
     30: { itemCode: '010230000', itemName: '국고채(30년)' }
 };
-export const ENGINE = 'yield-curve-monitor/5';
+export const ENGINE = 'korean-interest-rate-briefing/5';
 export const PACKET_VERSION = 5;
 export const SOURCE_ID = '한국은행 ECOS 817Y002';
 export const SOURCE_URL = 'https://ecos.bok.or.kr/';

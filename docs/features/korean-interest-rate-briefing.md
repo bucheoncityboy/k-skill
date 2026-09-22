@@ -1,6 +1,6 @@
-# 국고채 수익률곡선 모니터
+# 한국 금리 브리핑
 
-`yield-curve-monitor`는 한국은행 ECOS 일별 시장금리에서 국고채 2·3·5·10·20·30년을 같은 관측일로 정렬하고, 만기별 변화와 커브 움직임을 검증하는 조회·리서치 스킬이다. 범용 ECOS 조회는 `bok-ecos-stats`를 사용한다.
+`korean-interest-rate-briefing`은 한국은행 ECOS 일별 시장금리로 오늘의 한국 금리 흐름을 정리하는 스킬이다. 국고채 2·3·5·10·20·30년을 같은 관측일로 맞추고, 얼마나 움직였는지, 장단기 금리차가 어떻게 달라졌는지, 기준금리와 얼마나 차이 나는지를 검증한다. 범용 ECOS 조회는 `bok-ecos-stats`를 사용한다.
 
 ## 범위
 
@@ -33,16 +33,16 @@
 
 ```bash
 # 최신 커브와 전일·1주·전월말 비교
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --preset dashboard
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --preset dashboard
 
 # 최근 20거래일
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --lookback-sessions 20
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --lookback-sessions 20
 
 # 월말 대 월말
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --from-month 2026-07 --to-month 2026-08
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --from-month 2026-07 --to-month 2026-08
 
 # 이벤트 전후
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- --event-date 2026-08-27
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- --event-date 2026-08-27
 ```
 
 기본 응답은 대화에 핵심 코멘트, 만기별 금리·변화 표, 직접 출처 링크를 표시한다. 요청일이 휴일이거나 최신 통계가 아직 게시되지 않았으면 7일 이내의 최신 공통 관측일을 사용하고 요청일과 실제 관측일을 함께 밝힌다.
@@ -52,8 +52,8 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 사용자가 HTML·레포트·파일 저장을 요청한 경우에만 정확한 두 날짜와 `--out`을 사용한다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- \
-  --base 2026-09-11 --as-of 2026-09-18 --out ./yield-curve-report
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- \
+  --base 2026-09-11 --as-of 2026-09-18 --out ./interest-rate-briefing
 ```
 
 산출물은 다음 여섯 개다.
@@ -70,8 +70,8 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 `evidence.json`을 재생하면 네트워크 없이 동일한 여섯 파일을 생성한다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- \
-  --replay ./yield-curve-report/evidence.json --out ./yield-curve-replay
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- \
+  --replay ./interest-rate-briefing/evidence.json --out ./interest-rate-briefing-replay
 ```
 
 ## 뉴스 evidence
@@ -79,7 +79,7 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 뉴스 코멘트는 사용자가 원인·배경·헤드라인을 요청한 경우에만 추가한다. helper는 뉴스 사이트를 자동 크롤링하지 않는다. 에이전트가 공개 원문을 확인하고 제목, HTTPS URL, 게시 UTC, 140자 이하 요인 의역, 280자 이하 근거 의역만 JSON으로 전달한다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor.mjs -- \
+npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs -- \
   --news-template 2026-09-21 > news-evidence.json
 ```
 
@@ -103,7 +103,7 @@ npx -y @nomadamas/k-skill@0 exec yield-curve-monitor scripts/yield_curve_monitor
 세부 산술과 상태 판정은 다음 reference에 있다.
 
 ```bash
-npx -y @nomadamas/k-skill@0 read yield-curve-monitor references/methodology.md
+npx -y @nomadamas/k-skill@0 read korean-interest-rate-briefing references/methodology.md
 ```
 
 ## 실패 처리
@@ -121,7 +121,7 @@ npx -y @nomadamas/k-skill@0 read yield-curve-monitor references/methodology.md
 ## 검증
 
 ```bash
-node --test scripts/yield-curve-monitor.test.js
+node --test scripts/korean-interest-rate-briefing.test.js
 npm run generate:skill-stubs -- --check
 npm run sync:cli-skills -- --check
 npm run migrate:cli-assets -- --check

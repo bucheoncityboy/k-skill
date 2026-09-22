@@ -94,7 +94,7 @@ export async function writeArtifacts(out, p) {
 }
 export async function validateArtifacts(dir) {
     const manifest = JSON.parse(await readFile(join(dir, 'manifest.json'), 'utf8'));
-    if (manifest.version !== 5 || manifest.engine !== 'yield-curve-monitor/5' || !manifest.files || typeof manifest.files !== 'object')
+    if (manifest.version !== 5 || manifest.engine !== 'korean-interest-rate-briefing/5' || !manifest.files || typeof manifest.files !== 'object')
         throw Error('Unsupported manifest');
     const expected = [...artifactNames].sort(), declared = Object.keys(manifest.files).sort(), present = (await readdir(dir)).sort();
     if (JSON.stringify(declared) !== JSON.stringify(expected) || JSON.stringify(present) !== JSON.stringify([...expected, 'manifest.json'].sort()) || Object.values(manifest.files).some(x => typeof x !== 'string' || !/^[a-f0-9]{64}$/.test(x)) || !/^[a-f0-9]{64}$/.test(manifest.evidenceSha256))

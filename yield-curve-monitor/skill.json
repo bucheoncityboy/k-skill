@@ -1,8 +1,0 @@
-{
-  "name": "yield-curve-monitor",
-  "description": "한국은행 ECOS 국고채 2·3·5·10·20·30년을 공통 관측일로 정렬해 전일·전주·전월말·최근 거래일 변화, 스프레드와 기준금리 갭을 검증하고 선택적으로 출처 있는 시장 배경과 재현 가능한 보고서를 만든다. Use when the user asks 오늘 국고채 커브, 전일·전주·전월말 비교, 최근 금리 추이, steepening/flattening, 금리 움직임의 뉴스 배경 또는 출처 포함 레포트. Not for 범용 ECOS 조회(bok-ecos-stats), 실시간 호가, 채권 가격평가, 검증되지 않은 원인 추정 또는 매매 추천.",
-  "profiles": [
-    "lookup"
-  ],
-  "frontmatter": "name: yield-curve-monitor\ndescription: 한국은행 ECOS 국고채 2·3·5·10·20·30년을 공통 관측일로 정렬해 전일·전주·전월말·최근 거래일 변화, 스프레드와 기준금리 갭을 검증하고 선택적으로 출처 있는 시장 배경과 재현 가능한 보고서를 만든다. Use when the user asks 오늘 국고채 커브, 전일·전주·전월말 비교, 최근 금리 추이, steepening/flattening, 금리 움직임의 뉴스 배경 또는 출처 포함 레포트. Not for 범용 ECOS 조회(bok-ecos-stats), 실시간 호가, 채권 가격평가, 검증되지 않은 원인 추정 또는 매매 추천.\nlicense: MIT\nmetadata:\n  category: finance\n  locale: ko-KR\n  phase: v1"
-}

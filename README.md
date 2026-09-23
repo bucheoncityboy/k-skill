@@ -140,7 +140,7 @@ npx -y @nomadamas/k-skill@0 update
 | [대신증권 리포트 조회](docs/features/daishin-report-search.md) | `daishin-report-search` | GitHub Pages에 공개된 대신증권 리포트 HTML 미러에서 최신 리포트 목록, 원문, 설명 페이지, Rating/Target 표를 조회 |
 | [국가데이터처 KOSIS 통계 조회](docs/features/kosis-stats.md) | `kosis-stats` | 국가데이터처가 운영하는 KOSIS(국가통계포털) Open API로 통계표 검색·메타·데이터·대용량 자료 조회 (조회 전용) |
 | [한국은행 ECOS 경제통계 조회](docs/features/bok-ecos-stats.md) | `bok-ecos-stats` | 한국은행 ECOS Open API로 기준금리·환율·소비자물가지수·통화량 시계열과 100대 핵심지표 조회 |
-| [한국 금리 브리핑](docs/features/korean-interest-rate-briefing.md) | `korean-interest-rate-briefing` | 오늘의 국고채 금리, 기간별 변화, 장단기 금리차, 기준금리와의 차이 및 출처 있는 시장 배경을 한 번에 정리 (로그인·API 키 불필요) |
+| [한국 금리 동향 분석](docs/features/korean-interest-rate-analysis.md) | `korean-interest-rate-analysis` | 국고채 금리의 기간별 변화, 장단기 금리차·커브 움직임·기준금리 차이를 검증·분석하고 출처 있는 시장 배경을 제공 (로그인·API 키 불필요) |
 | [멀티에셋 모닝 브리핑](docs/features/multi-asset-morning-briefing.md) | `multi-asset-morning-briefing` | 미국·한국 최근 완료 세션을 독립 확인하고 글로벌 주식·금리·FX·원자재·변동성과 한국 전달 경로, 향후 5거래일 일정을 근거 링크가 있는 7개 섹션으로 작성 (로그인·API 키 불필요) |
 
 ### 💊 건강·의료

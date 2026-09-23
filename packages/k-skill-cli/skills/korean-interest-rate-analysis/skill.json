@@ -1,0 +1,8 @@
+{
+  "name": "korean-interest-rate-analysis",
+  "description": "한국은행 ECOS의 국고채 2·3·5·10·20·30년 금리를 같은 관측일로 맞춰 기간별 bp 변화, 장단기 금리차와 커브 움직임, 기준금리와의 차이를 검증·분석한다. 요청하면 출처가 확인된 시장 배경과 재현 가능한 보고서를 제공한다. Use when the user asks 오늘 금리, 금리가 얼마나 올랐는지, 전일·전주·전월말 비교, 장단기 금리차, 최근 금리 추이, 금리 움직임의 뉴스 배경 또는 출처 포함 레포트. Not for 범용 ECOS 조회(bok-ecos-stats), 실시간 호가, 예금·대출 금리, 개별 채권 가격평가, 검증되지 않은 원인 추정 또는 투자 추천.",
+  "profiles": [
+    "lookup"
+  ],
+  "frontmatter": "name: korean-interest-rate-analysis\ndescription: 한국은행 ECOS의 국고채 2·3·5·10·20·30년 금리를 같은 관측일로 맞춰 기간별 bp 변화, 장단기 금리차와 커브 움직임, 기준금리와의 차이를 검증·분석한다. 요청하면 출처가 확인된 시장 배경과 재현 가능한 보고서를 제공한다. Use when the user asks 오늘 금리, 금리가 얼마나 올랐는지, 전일·전주·전월말 비교, 장단기 금리차, 최근 금리 추이, 금리 움직임의 뉴스 배경 또는 출처 포함 레포트. Not for 범용 ECOS 조회(bok-ecos-stats), 실시간 호가, 예금·대출 금리, 개별 채권 가격평가, 검증되지 않은 원인 추정 또는 투자 추천.\nlicense: MIT\nmetadata:\n  category: finance\n  locale: ko-KR\n  phase: v1"
+}

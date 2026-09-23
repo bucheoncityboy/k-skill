@@ -28,7 +28,7 @@ function args(argv) {
     }
     return out;
 }
-const command = "npx -y @nomadamas/k-skill@0 exec korean-interest-rate-briefing scripts/korean_interest_rate_briefing.mjs --";
+const command = "npx -y @nomadamas/k-skill@0 exec korean-interest-rate-analysis scripts/korean_interest_rate_analysis.mjs --";
 const usage = `Usage:
   ${command} [--as-of YYYY-MM-DD] [--base YYYY-MM-DD] [--max-lag 0..14] [--text]
   ${command} --from-month YYYY-MM --to-month YYYY-MM [--text]
@@ -116,7 +116,7 @@ async function main() {
     const maxLag = typeof a['max-lag'] === 'string' ? Number(a['max-lag']) : 7;
     if (!Number.isInteger(maxLag) || maxLag < 0 || maxLag > 14)
         throw Error('--max-lag must be an integer from 0 to 14');
-    const cacheDir = resolve(typeof a['cache-dir'] === 'string' ? a['cache-dir'] : join(homedir(), '.cache', 'k-skill', 'korean-interest-rate-briefing')), useCache = a['no-cache'] !== true;
+    const cacheDir = resolve(typeof a['cache-dir'] === 'string' ? a['cache-dir'] : join(homedir(), '.cache', 'k-skill', 'korean-interest-rate-analysis')), useCache = a['no-cache'] !== true;
     const preset = typeof a.preset === 'string' ? a.preset : null, eventDate = typeof a['event-date'] === 'string' ? date(a['event-date']) : null, lookback = typeof a['lookback-sessions'] === 'string' ? Number(a['lookback-sessions']) : null;
     if ((preset !== null || lookback !== null || eventDate !== null) && (typeof a.input === 'string' || typeof a.replay === 'string' || typeof a.out === 'string' || typeof a['news-evidence'] === 'string' || hasMonth || typeof a.base === 'string'))
         throw Error('Preset/trend/event modes accept only date anchor, --max-lag, --cache-dir, --no-cache and --text');
@@ -190,13 +190,13 @@ async function main() {
     else if (typeof a.input === 'string') {
         const inputPath = resolve(a.input), raw = await readFile(inputPath, 'utf8'), observations = csvRead(raw), now = new Date().toISOString();
         const receipts = TENORS.map(tenor => { const rows = observations.filter(r => r.tenor === tenor), meta = TENOR_META[tenor]; return { tenor, sourceId: `사용자 제공 CSV: ${basename(inputPath)}`, sourceUrl: '', statCode: 'USER_CSV', itemCode: meta.itemCode, itemName: meta.itemName, unit: '연%', cycle: 'D', retrievedAt: now, status: 'input', raw: [raw], rawSha256: [sha256(raw)], count: rows.length, first: rows[0]?.date ?? null, last: rows.at(-1)?.date ?? null, windows: [] }; });
-        p = { version: PACKET_VERSION, engine: ENGINE, asOf, base, maxLag, observations, receipts, label: '한국 금리 브리핑' };
+        p = { version: PACKET_VERSION, engine: ENGINE, asOf, base, maxLag, observations, receipts, label: '한국 금리 동향 분석' };
     }
     else {
         if (asOf > kstToday())
             throw Error('Live collection cannot use a future KST as-of date');
         const result = await collect(base, asOf, maxLag, cacheDir, useCache);
-        p = { version: PACKET_VERSION, engine: ENGINE, asOf, base, maxLag, ...result, label: '한국 금리 브리핑' };
+        p = { version: PACKET_VERSION, engine: ENGINE, asOf, base, maxLag, ...result, label: '한국 금리 동향 분석' };
     }
     if (typeof a['news-evidence'] === 'string') {
         const raw = await readFile(resolve(a['news-evidence']), 'utf8');

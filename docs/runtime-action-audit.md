@@ -144,7 +144,7 @@
 | `subway-lost-property` | `lookup` | LOST112·운영기관 공식 표면의 검색 조건과 결과를 정리 |
 | `ticket-availability` | `booking` | 공식 일정·좌석 선택 → 예약·선점 → `clarify` 후 필요한 결제 |
 | `toss-investment` | `account` | 지원되는 계정 작업 수행 → 비가역 변경 직전 `clarify` |
-| `korean-interest-rate-briefing` | `lookup` | 오늘의 국고채 금리와 기간별 변화·장단기 금리차·기준금리 차이 조회 완료 |
+| `korean-interest-rate-analysis` | `lookup` | 국고채 금리의 기간별 변화·장단기 금리차·커브 움직임·기준금리 차이를 검증·분석 완료 |
 | `zipcode-search` | `lookup` | 요청한 조회를 완료하고, 별도 후속 행동 요청 시 지원되는 공식 표면으로 연결 |
 
 ## Commerce capability gaps

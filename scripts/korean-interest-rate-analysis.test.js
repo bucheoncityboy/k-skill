@@ -11,8 +11,8 @@ const { pathToFileURL } = require("node:url");
 
 const run = promisify(execFile);
 const repoRoot = path.join(__dirname, "..");
-const skillDir = path.join(repoRoot, "korean-interest-rate-briefing");
-const cli = path.join(skillDir, "scripts", "korean_interest_rate_briefing.mjs");
+const skillDir = path.join(repoRoot, "korean-interest-rate-analysis");
+const cli = path.join(skillDir, "scripts", "korean_interest_rate_analysis.mjs");
 const artifactNames = [
   "brief.md",
   "evidence.json",
@@ -41,9 +41,9 @@ async function sha(file) {
   return createHash("sha256").update(await fs.readFile(file)).digest("hex");
 }
 
-test("interest-rate briefing helper exposes the documented CLI", async () => {
+test("interest-rate analysis helper exposes the documented CLI", async () => {
   const { stdout } = await run(process.execPath, [cli, "--help"], { cwd: skillDir });
-  assert.match(stdout, /@nomadamas\/k-skill@0 exec korean-interest-rate-briefing scripts\/korean_interest_rate_briefing\.mjs --/);
+  assert.match(stdout, /@nomadamas\/k-skill@0 exec korean-interest-rate-analysis scripts\/korean_interest_rate_analysis\.mjs --/);
   assert.match(stdout, /--preset today\|dashboard/);
   assert.match(stdout, /--news-evidence FILE\.json/);
   assert.match(stdout, /--replay evidence\.json/);
@@ -113,7 +113,7 @@ test("news evidence enforces host, KST date, direction, and fingerprint", async 
 });
 
 test("report bundle is byte-identical when replayed", async (t) => {
-  const root = await fs.mkdtemp(path.join(os.tmpdir(), "korean-interest-rate-briefing-"));
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), "korean-interest-rate-analysis-"));
   t.after(() => fs.rm(root, { recursive: true, force: true }));
   const input = path.join(root, "input.csv");
   const first = path.join(root, "first");

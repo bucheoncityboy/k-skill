@@ -141,7 +141,7 @@ npx -y @nomadamas/k-skill@0 update
 | [국가데이터처 KOSIS 통계 조회](docs/features/kosis-stats.md) | `kosis-stats` | 국가데이터처가 운영하는 KOSIS(국가통계포털) Open API로 통계표 검색·메타·데이터·대용량 자료 조회 (조회 전용) |
 | [한국은행 ECOS 경제통계 조회](docs/features/bok-ecos-stats.md) | `bok-ecos-stats` | 한국은행 ECOS Open API로 기준금리·환율·소비자물가지수·통화량 시계열과 100대 핵심지표 조회 |
 | [멀티에셋 모닝 브리핑](docs/features/multi-asset-morning-briefing.md) | `multi-asset-morning-briefing` | 미국·한국 최근 완료 세션을 독립 확인하고 글로벌 주식·금리·FX·원자재·변동성과 한국 전달 경로, 향후 5거래일 일정을 근거 링크가 있는 7개 섹션으로 작성 (로그인·API 키 불필요) |
-| [범용 시장 사건 영향 분석](docs/features/market-event-impact.md) | `market-event-impact` | 공식 발표·당시 보도·확정 가격을 대조해 사건의 변화와 교차자산 전달경로를 분석하고 이벤트 스터디를 보조 증거로 제시 (로그인·API 키 불필요) |
+| [시장 이벤트 영향 분석](docs/features/market-event-impact.md) | `market-event-impact` | 공식 발표·당시 보도·확정 가격을 대조해 사건의 변화와 교차자산 전달경로를 분석하고 이벤트 스터디를 보조 증거로 제시 (로그인·API 키 불필요) |
 
 ### 💊 건강·의료
 

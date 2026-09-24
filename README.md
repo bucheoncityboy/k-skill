@@ -141,6 +141,7 @@ npx -y @nomadamas/k-skill@0 update
 | [국가데이터처 KOSIS 통계 조회](docs/features/kosis-stats.md) | `kosis-stats` | 국가데이터처가 운영하는 KOSIS(국가통계포털) Open API로 통계표 검색·메타·데이터·대용량 자료 조회 (조회 전용) |
 | [한국은행 ECOS 경제통계 조회](docs/features/bok-ecos-stats.md) | `bok-ecos-stats` | 한국은행 ECOS Open API로 기준금리·환율·소비자물가지수·통화량 시계열과 100대 핵심지표 조회 |
 | [멀티에셋 모닝 브리핑](docs/features/multi-asset-morning-briefing.md) | `multi-asset-morning-briefing` | 미국·한국 최근 완료 세션을 독립 확인하고 글로벌 주식·금리·FX·원자재·변동성과 한국 전달 경로, 향후 5거래일 일정을 근거 링크가 있는 7개 섹션으로 작성 (로그인·API 키 불필요) |
+| [한국 채권 종목 조회·비교](docs/features/korean-bond-search.md) | `korean-bond-search` | GS Quant의 Instrument/Data 구조화 방식에서 영감을 받아 한국 채권을 표준 Bond Instrument 필드로 정리하고, 발행조건·잔액·CALL/PUT·CB/EB/BW를 출처·확인시각과 함께 검색·비교 (로그인·API 키 불필요) |
 
 ### 💊 건강·의료
 

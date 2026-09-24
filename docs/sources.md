@@ -285,3 +285,5 @@
 - 한국은행 ECOS `802Y001`: https://ecos.bok.or.kr/api — 한국 최근 완료 세션과 KOSPI·KOSDAQ 종가를 독립 확인하는 공식 원천.
 - FRED 공개 CSV: https://fred.stlouisfed.org/graph/fredgraph.csv?id=<ID1>,<ID2> — `multi-asset-morning-briefing`의 보조 fallback. helper는 ZIP 멤버를 전부 날짜 기준으로 병합하고 시리즈별 `stale`·`lag_days`를 보고하므로 목표 세션과 다른 값은 브리핑에서 제외한다.
 - JS 챌린지로 보호되는 시장 데이터 집계 사이트는 `multi-asset-morning-briefing`의 조회 경로에서 제외하고 공식 정적 endpoint를 우선한다.
+- `market-event-impact`의 사건 원천은 해당 사건의 정부·중앙은행·규제기관·거래소·기업 공식 발표를 우선한다. 예: 연준 FOMC(https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm), 미국 노동통계국 CPI(https://www.bls.gov/cpi/), 한국은행 통화정책(https://www.bok.or.kr/portal/main/main.do). 당시 시장 해석과 예상치는 Reuters(https://www.reuters.com/) 등 보도와 분리해 기록한다.
+- `market-event-impact`의 가격 원천은 해당 시장의 거래소·공식 시계열을 우선한다. 미국 재무부 금리(https://home.treasury.gov/resource-center/data-chart-center/interest-rates), Cboe VIX(https://www.cboe.com/tradable_products/vix/vix_historical_data/), FRED(https://fred.stlouisfed.org/) 등의 관측시각·시간대·가격종류를 보존한다. Investing.com 역사적 데이터(https://www.investing.com/)는 공식 확정 종가가 부족할 때 보조로 사용하며 사건 자체의 근거로 쓰지 않는다.

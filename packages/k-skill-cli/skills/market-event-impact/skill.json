@@ -1,9 +1,9 @@
 {
   "name": "market-event-impact",
-  "description": "FOMC·CPI 같은 정례 발표부터 은행 파산·신용등급 변경·관세·지정학 충격까지, 특정 사건이 무엇을 바꿨고 시장이 왜 반응했는지 공식자료·당시 보도·확정 가격으로 분석하는 한국어 대화형 스킬. 사건 시각과 자산별 관측시각을 맞춰 금리·외환·주식 전달경로를 검증하고, 이벤트 스터디를 보조 증거로 제시한다. Use for named market-moving events. Not for 실시간 호가·예측·매매 추천.",
+  "description": "GS Quant의 event_study·event_impact_analysis·CalendarAlignment 구조에서 영감을 받아, 정례 발표와 비정형 사건의 핵심 변화 및 시장 해석을 공식자료·당시 보도·검증 가격으로 정리한다. 교차자산 전달경로를 살피고 이벤트 스터디는 보조 증거로 제시하며, 유사사례와 다음 촉매를 한국어로 설명한다. Use for named market-moving events. Not for live quotes, forecasts, or investment advice.",
   "profiles": [
     "lookup",
     "browser"
   ],
-  "frontmatter": "name: market-event-impact\ndescription: FOMC·CPI 같은 정례 발표부터 은행 파산·신용등급 변경·관세·지정학 충격까지, 특정 사건이 무엇을 바꿨고 시장이 왜 반응했는지 공식자료·당시 보도·확정 가격으로 분석하는 한국어 대화형 스킬. 사건 시각과 자산별 관측시각을 맞춰 금리·외환·주식 전달경로를 검증하고, 이벤트 스터디를 보조 증거로 제시한다. Use for named market-moving events. Not for 실시간 호가·예측·매매 추천.\nlicense: MIT\nmetadata:\n  category: finance\n  locale: ko-KR\n  phase: v1"
+  "frontmatter": "name: market-event-impact\ndescription: GS Quant의 event_study·event_impact_analysis·CalendarAlignment 구조에서 영감을 받아, 정례 발표와 비정형 사건의 핵심 변화 및 시장 해석을 공식자료·당시 보도·검증 가격으로 정리한다. 교차자산 전달경로를 살피고 이벤트 스터디는 보조 증거로 제시하며, 유사사례와 다음 촉매를 한국어로 설명한다. Use for named market-moving events. Not for live quotes, forecasts, or investment advice.\nlicense: MIT\nmetadata:\n  category: finance\n  locale: ko-KR\n  phase: v1"
 }

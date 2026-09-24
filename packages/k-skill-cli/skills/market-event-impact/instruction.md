@@ -1,4 +1,4 @@
-# 시장 사건 영향 분석
+# 사건별 시장반응 리서치
 
 ## What this skill does
 

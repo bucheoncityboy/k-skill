@@ -18,7 +18,7 @@ Runtime mode: generic
 - Resolve an asset path with `npx -y @nomadamas/k-skill@0 path market-event-impact <relative-path>` only when another tool explicitly requires a filesystem path.
 - Read bundled references through `npx -y @nomadamas/k-skill@0 read market-event-impact references/<file>`.
 
-# 시장 사건 영향 분석
+# 사건별 시장반응 리서치
 
 ## What this skill does
 
